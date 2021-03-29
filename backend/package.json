@@ -1,0 +1,11 @@
+{
+  "name": "pubgenius-backend",
+  "version": "1.0.0",
+  "description": "Backend to handle analytics data polling for our website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Meshack Mwaura",
+  "license": "ISC"
+}
