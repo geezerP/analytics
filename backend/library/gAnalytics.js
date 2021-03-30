@@ -12,3 +12,26 @@ const jwt = new google.auth.JWT({
   key: privateKey,
   scopes,
 });
+
+//Retrieve data
+async function getMetric(metric, startDate, endDate) {
+    await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](
+      Math.trunc(1000 * Math.random()),
+    ); // 3 sec
+  
+    const result = await analytics.data.ga.get({
+      auth: jwt,
+      ids: `ga:${viewId}`,
+      'start-date': startDate,
+      'end-date': endDate,
+      metrics: metric,
+    });
+  
+    const res = {};
+    res[metric] = {
+      value: parseInt(result.data.totalsForAllResults[metric], 10),
+      start: startDate,
+      end: endDate,
+    };
+    return res;
+  }
