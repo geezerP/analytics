@@ -1,6 +1,6 @@
 # Analytics Dashboard
 This analytics dashboard is a custom built website analytics dashboard built on Nodejs and React. 
-It utilizes the googleapis package to read metrics and display them in a simple and elegant way. It also implements real 
+It utilizes the googleapis package to read metrics and display them in a simple way. It also implements real 
 time analytics using Socket.io and a custom script.
   
 # Installation & Usage
