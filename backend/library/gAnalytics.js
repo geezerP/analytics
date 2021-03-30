@@ -16,46 +16,45 @@ const jwt = new google.auth.JWT({
   scopes,
 });
 
-//Retrieve data
 async function getMetric(metric, startDate, endDate) {
-    await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](
-      Math.trunc(1000 * Math.random()),
-    ); // 3 sec
-  
-    const result = await analytics.data.ga.get({
-      auth: jwt,
-      ids: `ga:${viewId}`,
-      'start-date': startDate,
-      'end-date': endDate,
-      metrics: metric,
-    });
-  
-    const res = {};
-    res[metric] = {
-      value: parseInt(result.data.totalsForAllResults[metric], 10),
-      start: startDate,
-      end: endDate,
-    };
-    return res;
+  await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](
+    Math.trunc(1000 * Math.random()),
+  );
+
+  const result = await analytics.data.ga.get({
+    auth: jwt,
+    ids: `ga:${viewId}`,
+    'start-date': startDate,
+    'end-date': endDate,
+    metrics: metric,
+  });
+
+  const res = {};
+  res[metric] = {
+    value: parseInt(result.data.totalsForAllResults[metric], 10),
+    start: startDate,
+    end: endDate,
+  };
+  return res;
+}
+
+function parseMetric(metric) {
+  let cleanMetric = metric;
+  if (!cleanMetric.startsWith('ga:')) {
+    cleanMetric = `ga:${cleanMetric}`;
+  }
+  return cleanMetric;
+}
+
+function getData(metrics = ['ga:users'], startDate = '30daysAgo', endDate = 'today') {
+  // ensure all metrics have ga:
+  const results = [];
+  for (let i = 0; i < metrics.length; i += 1) {
+    const metric = parseMetric(metrics[i]);
+    results.push(getMetric(metric, startDate, endDate));
   }
 
-  function parseMetric(metric) {
-    let cleanMetric = metric;
-    if (!cleanMetric.startsWith('ga:')) {
-      cleanMetric = `ga:${cleanMetric}`;
-    }
-    return cleanMetric;
-  }
+  return results;
+}
 
-  function getData(metrics = ['ga:users'], startDate = '30daysAgo', endDate = 'today') {
-    // ensure all metrics have ga:
-    const results = [];
-    for (let i = 0; i < metrics.length; i += 1) {
-      const metric = parseMetric(metrics[i]);
-      results.push(getMetric(metric, startDate, endDate));
-    }
-  
-    return results;
-  }
-  
-  module.exports = { getData };
+module.exports = { getData };

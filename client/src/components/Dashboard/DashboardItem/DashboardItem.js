@@ -73,9 +73,9 @@ class DashboardItem extends Component {
 
     let url;
     if (visual === 'chart') {
-      url = `http://localhost:5000/api/graph?metric=${strippedMetric}`;
+      url = `http://localhost:3001/api/graph?metric=${strippedMetric}`;
     } else {
-      url = `http://localhost:5000/api?metrics=${strippedMetric}`;
+      url = `http://localhost:3001/api?metrics=${strippedMetric}`;
     }
 
     fetch(url, {
@@ -86,12 +86,8 @@ class DashboardItem extends Component {
       .then((data) => {
         let value;
         let formattedValue;
-
-        //Right Permissions to be determined 
-        let jsonData = JSON.parse(JSON.stringify(data))
         if (visual === 'chart') {
-            console.log(jsonData.status)
-          value = data;
+          value = data.data[strippedMetric];
           formattedValue = value;
         } else {
           try {
