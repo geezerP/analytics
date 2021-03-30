@@ -24,9 +24,9 @@ export default {
   },
   background: {
     primary: '#f2e1b7',
-    secondary: '#ffb3b1',
+    secondary: '#33b890',
     tertiary: '#9ac48d',
-    quaternary: '#fdae03',
+    quaternary: '#7ec3e6',
     quinary: '#e7140d',
   },
 };

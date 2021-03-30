@@ -86,8 +86,12 @@ class DashboardItem extends Component {
       .then((data) => {
         let value;
         let formattedValue;
+
+        //Right Permissions to be determined 
+        let jsonData = JSON.parse(JSON.stringify(data))
         if (visual === 'chart') {
-          value = data.data[strippedMetric];
+            console.log(jsonData.status)
+          value = data;
           formattedValue = value;
         } else {
           try {
