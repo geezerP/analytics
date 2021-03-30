@@ -1,3 +1,6 @@
+//loads all our variables into process.env for later use
+require('dotenv').config();
+
 // Config
 const clientEmail = process.env.CLIENT_EMAIL;
 const privateKey = process.env.PRIVATE_KEY.replace(new RegExp('\\\\n'), '\n');
