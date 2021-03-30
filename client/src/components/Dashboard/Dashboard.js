@@ -17,11 +17,11 @@ const Dashboard = (props) => {
   return (
     <div className={classes.root}>
       <Grid container direction={isMobile ? 'column' : 'row'} spacing={3} justify="center" alignItems="center">
-        <DashboardItem size={6} priority="quinary" metric="Real Time" />
+        <DashboardItem priority="quinary" metric="Real Time" />
+        <DashboardItem priority="quinary" metric="Sessions"/>
+        <DashboardItem priority="quinary" metric="Page Views"/>
         <DashboardItem size={10} priority="secondary" metric="Users" visual="chart" type="line" />
         <DashboardItem size={12} priority="secondary" metric="Total Events" visual="chart" type="line"/>
-        <DashboardItem size={6} priority="primary" metric="Sessions"/>
-        <DashboardItem size={6} priority="primary" metric="Page Views"/>
       </Grid>
     </div>
   );
