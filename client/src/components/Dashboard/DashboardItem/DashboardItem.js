@@ -73,9 +73,9 @@ class DashboardItem extends Component {
 
     let url;
     if (visual === 'chart') {
-      url = `http://localhost:3001/api/graph?metric=${strippedMetric}`;
+      url = `http://localhost:5000/api/graph?metric=${strippedMetric}`;
     } else {
-      url = `http://localhost:3001/api?metrics=${strippedMetric}`;
+      url = `http://localhost:5000/api?metrics=${strippedMetric}`;
     }
 
     fetch(url, {
@@ -94,7 +94,7 @@ class DashboardItem extends Component {
             value = strippedMetric.startsWith('ga:') ? data.data[strippedMetric] : data.data[`ga:${strippedMetric}`];
             formattedValue = numberWithCommas(parseInt(value.value, 10));
           } catch (exp) {
-            console.log(exp);
+            console.error(exp);
             formattedValue = "Error Retrieving Value"
           }
         }

@@ -22,9 +22,6 @@ if (process.env.NODE_ENV === 'production') {
 
 app.get('/api', (req, res) => {
   const { metrics, startDate, endDate } = req.query;
-  console.log(`Requested metrics: ${metrics}`);
-  console.log(`Requested start-date: ${startDate}`);
-  console.log(`Requested end-date: ${endDate}`);
 
   Promise.all(getData(metrics ? metrics.split(',') : metrics, startDate, endDate))
     .then((data) => {
@@ -36,21 +33,17 @@ app.get('/api', (req, res) => {
         });
       });
 
-      res.send({ data: body });
+      res.send({ data: body, status: res.status });
 
-      console.log('Done');
     })
     .catch((err) => {
-      console.log('Error:');
-      console.log(err);
+      console.error(err);
       res.send({ status: 'Error getting a metric', message: `${err}` });
-      console.log('Done');
     });
 });
 
-app.get('/api/graph', (req, res) => {
+app.get('/api/graph', async (req, res) => {
   const { metric } = req.query;
-  console.log(`Requested graph of metric: ${metric}`);
 
   // 1 week time frame
   let promises = [];
@@ -67,16 +60,12 @@ app.get('/api/graph', (req, res) => {
       Object.values(data).forEach((value) => {
         body[metric].push(value[metric.startsWith('ga:') ? metric : `ga:${metric}`]);
       });
-      console.log(body);
 
-      res.send({ data: body });
-      console.log('Done');
+      res.send({ data: body, status: res.status });
     })
     .catch((err) => {
-      console.log('Error:');
-      console.log(err);
+      console.error(err);
       res.send({ status: 'Error', message: `${err}` });
-      console.log('Done');
     });
 });
 

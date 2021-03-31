@@ -10,7 +10,6 @@ export const RealTimeItem = () => {
   const [connections, setConnections] = useState(0);
 
   getConnections((conns) => {
-    console.log(conns);
     setConnections(conns);
   });
 

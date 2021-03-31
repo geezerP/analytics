@@ -40,21 +40,11 @@ async function getMetric(metric, startDate, endDate) {
 
 function parseMetric(metric) {
   let cleanMetric = metric;
-  if (!cleanMetric.startsWith('ga:')) {
-    cleanMetric = `ga:${cleanMetric}`;
-  }
-  return cleanMetric;
+  return cleanMetric.startsWith('ga:') ? cleanMetric : `ga:${cleanMetric}`;
 }
 
 function getData(metrics = ['ga:users'], startDate = '30daysAgo', endDate = 'today') {
-  // ensure all metrics have ga:
-  const results = [];
-  for (let i = 0; i < metrics.length; i += 1) {
-    const metric = parseMetric(metrics[i]);
-    results.push(getMetric(metric, startDate, endDate));
-  }
-
-  return results;
+  return metrics.map(x => getMetric(parseMetric(x), startDate, endDate));
 }
 
 module.exports = { getData };
